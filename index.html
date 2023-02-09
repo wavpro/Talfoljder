@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+  <canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;">
+    Your browser does not support the HTML5 canvas tag.</canvas>
+  <input type="number" id="input"><input type="submit" onclick="draw()">
+
+  <script>
+    function draw() {
+      let sqW = 10,
+        sqH = 10,
+        n = document.getElementById("input").value;
+
+      var c = document.getElementById("myCanvas");
+      var ctx = c.getContext("2d");
+      ctx.clearRect(0, 0, c.width, c.height);
+      ctx.beginPath();
+      ctx.fillStyle = "#00FF0080";
+      ctx.strokeStyle = "green";
+      ctx.rect(c.width / 2 - (sqW / 2), c.height / 2 - (sqH / 2), sqW, sqH);
+      ctx.fillRect(c.width / 2 - (sqW / 2) + 1, c.height / 2 - (sqH / 2) + 1, sqW - 1, sqH - 1);
+      ctx.stroke();
+      for (i = 1; i < n; i++) {
+        Array.from({length: 4}, (x, _i) => {
+          let w = c.width / 2 - (sqW / 2);
+          let h = c.height / 2 - (sqH / 2);
+          if (_i === 0) {
+            w = w - (i * 11)
+          }
+          if (_i === 1) {
+            w = w + (i * 11)
+          }
+          if (_i === 2) {
+            h = h + (i * 11)
+          }
+          if (_i === 3) {
+            h = h - (i * 11)
+          }
+          ctx.beginPath();
+          ctx.fillStyle = "#00FF0080";
+          ctx.strokeStyle = "green";
+          ctx.rect(w, h, sqW, sqH);
+          ctx.fillRect(w + 1, h + 1, sqW - 1, sqH - 1);
+          ctx.stroke();
+        });
+      }
+    }
+  </script>
+
+</body>
+
+</html>
