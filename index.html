@@ -3,7 +3,7 @@
 
 <body>
 
-  <canvas id="myCanvas" width="300" height="300" style="border:1px solid #d3d3d3;">
+  <canvas id="myCanvas" width="600" height="600" style="border:1px solid #d3d3d3;">
     Your browser does not support the HTML5 canvas tag.</canvas>
   <input type="number" id="input"><input type="submit" onclick="draw()">
 
@@ -15,6 +15,7 @@
 
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");
+
       ctx.clearRect(0, 0, c.width, c.height);
       ctx.beginPath();
       ctx.fillStyle = "#00FF0080";
@@ -22,6 +23,7 @@
       ctx.rect(c.width / 2 - (sqW / 2), c.height / 2 - (sqH / 2), sqW, sqH);
       ctx.fillRect(c.width / 2 - (sqW / 2) + 1, c.height / 2 - (sqH / 2) + 1, sqW - 1, sqH - 1);
       ctx.stroke();
+
       for (i = 1; i < n; i++) {
         Array.from({length: 4}, (x, _i) => {
           let w = c.width / 2 - (sqW / 2);
@@ -38,6 +40,7 @@
           if (_i === 3) {
             h = h - (i * 11)
           }
+
           ctx.beginPath();
           ctx.fillStyle = "#00FF0080";
           ctx.strokeStyle = "green";
@@ -47,6 +50,15 @@
         });
       }
     }
+
+    let input = document.getElementById("input");
+
+    input.addEventListener("keypress", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        draw()
+      }
+    });
   </script>
 
 </body>
